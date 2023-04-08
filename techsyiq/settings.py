@@ -41,6 +41,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'accounts',
+    'blog',
+    'Team',
+    'testimonials',
+    'Course',
+    'Applications',
 ]
 
 CORS_ALLOW_CREDENTIALS = True 
