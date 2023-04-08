@@ -3,7 +3,7 @@ from django.conf import settings
 from cloudinary.models import CloudinaryField
 
 # Create your models here.
-class TechsyiqTeam(models.Model):
+class Team(models.Model):
   name = models.CharField(max_length=255)
   title= models.CharField(max_length=255)
   social_media_link = models.URLField(blank=True)
