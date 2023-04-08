@@ -114,3 +114,18 @@ def update_blog_details(self, request, *args, **kwargs):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+# delete blog
+@api_view(['DELETE'])
+def delete_blog_details(self, request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    try:
+        blog = Blog.objects.filter(id = pk).first()
+    
+    except Blog.DoesNotExist:
+        return Response({"message":"Blog does not exist"}, status=status.HTTP_404_NOT_FOUND)
+    
+    blog.delete()
+    return Response({"message":"Blog deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
