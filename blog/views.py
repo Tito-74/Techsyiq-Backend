@@ -45,3 +45,18 @@ def update_category_details(self, request, *args, **kwargs):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# delete category
+@api_view(['DELETE'])
+def delete_category(self, request, *args, **kwargs):
+      pk = kwargs.get('pk')
+      try:
+          category = Category.objects.filter(id = pk).first()
+
+      except Category.DoesNotExist:
+          return Response({"message":"Category does not exist"}, status=status.HTTP_404_NOT_FOUND)
+      
+      category.delete()
+
+      return Response({"message":"Category deleted"}, status=status.HTTP_204_NO_CONTENT)
