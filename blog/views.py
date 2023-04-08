@@ -28,3 +28,20 @@ def get_all_category(request):
     category = Category.objects.all()
     serializer = CategorySerializer(category, many=True)
     return Response(serializer.data)
+
+# updating category details
+@api_view(['GET'])
+@csrf_exempt
+def update_category_details(self, request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    try:
+        category = Category.objects.filter(id = pk).first()
+
+    except Category.DoesNotExist:
+        return Response({"message":"Category does not exist"}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = CategorySerializer(instance=category, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
