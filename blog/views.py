@@ -43,7 +43,7 @@ def update_category_details(self, request, *args, **kwargs):
     serializer = CategorySerializer(instance=category, data=request.data)
     if serializer.is_valid():
         serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -95,3 +95,22 @@ def get_single_blog_details(self, request, *args, **kwargs):
     
     serializer = BlogSerializer(blog)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+# updating blogs details
+@api_view(['PUT'])
+@csrf_exempt
+def update_blog_details(self, request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    try:
+        blog = Blog.objects.filter(id = pk).first()
+    
+    except Blog.DoesNotExist:
+        return Response({"message":"Blog does not exist"}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = BlogSerializer(instance=blog, data = request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
