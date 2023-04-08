@@ -7,4 +7,6 @@ urlpatterns = [
     path('delete_category/<int:pk>', delete_category, name='delete_category'),
     # blog
     path('create_blog', create_blog_details, name='create_blog')
+    path('fetch_blogs', get_all_blogs, name='fetch_blogs')
+    
 ]

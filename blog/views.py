@@ -30,7 +30,7 @@ def get_all_category(request):
     return Response(serializer.data)
 
 # updating category details
-@api_view(['GET'])
+@api_view(['PUT'])
 @csrf_exempt
 def update_category_details(self, request, *args, **kwargs):
     pk = kwargs.get('pk')
@@ -73,3 +73,10 @@ def create_blog_details(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# get all blogs
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_all_blogs(request):
+    blogs = Blog.objects.all()
+    serializer = BlogSerializer(blogs, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
