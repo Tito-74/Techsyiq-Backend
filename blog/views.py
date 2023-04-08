@@ -60,3 +60,16 @@ def delete_category(self, request, *args, **kwargs):
       category.delete()
 
       return Response({"message":"Category deleted"}, status=status.HTTP_204_NO_CONTENT)
+
+
+# *************Blog***************
+# create blog
+@api_view(['POST'])
+@csrf_exempt
+def create_blog_details(request):
+    serializer = BlogSerializer(data = request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
