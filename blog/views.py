@@ -18,3 +18,13 @@ def create_category(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+# getting all category in db
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_all_category(request):
+    category = Category.objects.all()
+    serializer = CategorySerializer(category, many=True)
+    return Response(serializer.data)
