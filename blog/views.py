@@ -80,3 +80,18 @@ def get_all_blogs(request):
     blogs = Blog.objects.all()
     serializer = BlogSerializer(blogs, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# get single blog details
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_single_blog_details(self, request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    try:
+        blog = Blog.objects.filter(id = pk).first()
+    
+    except Blog.DoesNotExist:
+        return Response({"message":"Blog does not exist"}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = BlogSerializer(blog)
+    return Response(serializer.data, status=status.HTTP_200_OK)
