@@ -9,7 +9,7 @@ from .models import Application
 
 # Create your views here.
 
-@api_view(['Post'])
+@api_view(['POST'])
 @permission_classes([AllowAny])
 @csrf_exempt
 def create_application(request, *args, **kwargs):
@@ -19,4 +19,10 @@ def create_application(request, *args, **kwargs):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# view application
+@api_view(['GET'])
+def get_all_application_details(request):
+    application = Application.objects.all()
+    serializer = ApplicationSerializer(application, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
