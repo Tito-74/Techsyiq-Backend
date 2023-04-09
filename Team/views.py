@@ -26,3 +26,34 @@ def get_members(request):
     serializer = TeamSerializer(members, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+# update member details
+@api_view(['PUT'])
+@csrf_exempt
+def update_member_details(self, request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    try:
+        team = Team.Objects.filter(id=pk).first()
+    
+    except Team.DoesNotExist:
+        return Response({"message":"Member does not exist"}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = TeamSerializer(instance=team, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({"message":"Member updated successfully"}, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def delete_member_details(self, request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    try:
+        team = Team.Objects.filter(id=pk).first()
+    
+    except Team.DoesNotExist:
+        return Response({"message":"Member does not exist"}, status=status.HTTP_404_NOT_FOUND)
+    
+    team.delete()
+
+    return Response({"message":"Member deleted successfully"}, status=status.HTTP_200_OK)
