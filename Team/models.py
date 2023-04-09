@@ -4,10 +4,10 @@ from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Team(models.Model):
-  name = models.CharField(max_length=255)
-  title= models.CharField(max_length=255)
+  name = models.CharField(max_length=255, null=False, blank=False, default=None,)
+  title= models.CharField(max_length=255, null=False, blank=False)
   social_media_link = models.URLField(blank=True)
-  description = models.TextField(blank=False)
+  description = models.TextField(default=None, blank=False)
   image = CloudinaryField('images', default=None)
   author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
