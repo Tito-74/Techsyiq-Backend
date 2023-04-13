@@ -32,14 +32,14 @@ def get_all_category(request):
 # updating category details
 @api_view(['PUT'])
 @csrf_exempt
-def update_category_details(self, request, *args, **kwargs):
-    pk = kwargs.get('pk')
+def update_category_details(request, pk):
+    # pk = kwargs.get('pk')
     try:
         category = Category.objects.filter(id = pk).first()
-
+        print("category", category)
     except Category.DoesNotExist:
         return Response({"message":"Category does not exist"}, status=status.HTTP_404_NOT_FOUND)
-    
+    print("request", request.data)
     serializer = CategorySerializer(instance=category, data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -49,8 +49,8 @@ def update_category_details(self, request, *args, **kwargs):
 
 # delete category
 @api_view(['DELETE'])
-def delete_category(self, request, *args, **kwargs):
-      pk = kwargs.get('pk')
+def delete_category(request, pk):
+    #   pk = kwargs.get('pk')
       try:
           category = Category.objects.filter(id = pk).first()
 
@@ -85,8 +85,8 @@ def get_all_blogs(request):
 # get single blog details
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def get_single_blog_details(self, request, *args, **kwargs):
-    pk = kwargs.get('pk')
+def get_single_blog_details(request, pk):
+    # pk = kwargs.get('pk')
     try:
         blog = Blog.objects.filter(id = pk).first()
     
@@ -101,8 +101,8 @@ def get_single_blog_details(self, request, *args, **kwargs):
 # updating blogs details
 @api_view(['PUT'])
 @csrf_exempt
-def update_blog_details(self, request, *args, **kwargs):
-    pk = kwargs.get('pk')
+def update_blog_details(request, pk):
+    # pk = kwargs.get('pk')
     try:
         blog = Blog.objects.filter(id = pk).first()
     
@@ -119,8 +119,8 @@ def update_blog_details(self, request, *args, **kwargs):
 
 # delete blog
 @api_view(['DELETE'])
-def delete_blog_details(self, request, *args, **kwargs):
-    pk = kwargs.get('pk')
+def delete_blog_details(request, pk):
+    # pk = kwargs.get('pk')
     try:
         blog = Blog.objects.filter(id = pk).first()
     
