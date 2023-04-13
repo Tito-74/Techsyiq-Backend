@@ -30,10 +30,10 @@ def get_members(request):
 # update member details
 @api_view(['PUT'])
 @csrf_exempt
-def update_member_details(self, request, *args, **kwargs):
-    pk = kwargs.get('pk')
+def update_member_details(request, pk):
+    # pk = kwargs.get('pk')
     try:
-        team = Team.Objects.filter(id=pk).first()
+        team = Team.objects.filter(id=pk).first()
     
     except Team.DoesNotExist:
         return Response({"message":"Member does not exist"}, status=status.HTTP_404_NOT_FOUND)
@@ -46,10 +46,10 @@ def update_member_details(self, request, *args, **kwargs):
 
 
 @api_view(['DELETE'])
-def delete_member_details(self, request, *args, **kwargs):
-    pk = kwargs.get('pk')
+def delete_member_details(request, pk):
+    # pk = kwargs.get('pk')
     try:
-        team = Team.Objects.filter(id=pk).first()
+        team = Team.objects.filter(id=pk).first()
     
     except Team.DoesNotExist:
         return Response({"message":"Member does not exist"}, status=status.HTTP_404_NOT_FOUND)

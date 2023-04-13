@@ -32,7 +32,7 @@ class SafeJWTAuthentication(BaseAuthentication):
             raise exceptions.AuthenticationFailed('user not found')
         if not user.is_active:
             raise exceptions.AuthenticationFailed('user is not active')
-        self.enforce_csrf(request)
+        # self.enforce_csrf(request)
         return (user, None)
     
 

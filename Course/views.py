@@ -30,30 +30,31 @@ def get_all_course(request):
 # update member details
 @api_view(['PUT'])
 @csrf_exempt
-def update_course_details(self, request, *args, **kwargs):
-    pk = kwargs.get('pk')
+def update_course_details(request, pk):
+    # pk = kwargs.get('pk')
+    print(pk)
     try:
-        course = Course.Objects.filter(id=pk).first()
-    
+        course = Course.objects.filter(id=pk).first()
+        print(course)
     except course.DoesNotExist:
-        return Response({"message":"Member does not exist"}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"message":"Course does not exist"}, status=status.HTTP_404_NOT_FOUND)
     
     serializer = CourseSerializer(instance=course, data=request.data)
     if serializer.is_valid():
         serializer.save()
-        return Response({"message":"Member updated successfully"}, status=status.HTTP_200_OK)
+        return Response({"message":"Course updated successfully"}, status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['DELETE'])
-def delete_course_details(self, request, *args, **kwargs):
-    pk = kwargs.get('pk')
+def delete_course_details(request, pk):
+    # pk = kwargs.get('pk')
     try:
-        course = Course.Objects.filter(id=pk).first()
+        course = Course.objects.filter(id=pk).first()
     
     except course.DoesNotExist:
-        return Response({"message":"Member does not exist"}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"message":"Course does not exist"}, status=status.HTTP_404_NOT_FOUND)
     
     course.delete()
 
-    return Response({"message":"Member deleted successfully"}, status=status.HTTP_200_OK)
+    return Response({"message":"Course deleted successfully"}, status=status.HTTP_200_OK)
