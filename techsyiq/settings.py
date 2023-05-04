@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'testimonials',
     'Course',
     'Applications',
+    'marketing',
 ]
 
 CORS_ALLOW_CREDENTIALS = True 
@@ -160,9 +161,17 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get("EMAIL_HOST")
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='lankip.test@gmail.com'
+EMAIL_HOST_PASSWORD='sobqqnopuisxmdvn'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_USE_SSL=False
+# EMAIL_HOST = os.environ.get("EMAIL_HOST")
+# EMAIL_HOST_USER = 'lankip.test@gmail.com'
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+# EMAIL_PORT = os.environ.get('EMAIL_PORT')
+# EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+# EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
+
+print("email", EMAIL_HOST_USER)
