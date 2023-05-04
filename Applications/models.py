@@ -9,6 +9,7 @@ STARTING_DATE = (
 # application model
 class Application(models.Model):
   name = models.CharField(max_length=255, null = False, blank = False)
+  created_at = models.DateTimeField(auto_now_add=True,verbose_name='created_at')
   phone_no = models.CharField(max_length=255, null = False, blank = False)
   email = models.EmailField(max_length=255, null = False, blank = False)
   module = models.CharField(max_length=255, null = False, blank = False)

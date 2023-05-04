@@ -17,7 +17,7 @@ def create_application(request):
     serializer = ApplicationSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        send_mail('Application Recieve','Your application was recieved and we are evaluating your documents.','kipkirui133@gmail.com',[request.data['email']], fail_silently = True)
+        send_mail('Application Recieved','Your application was recieved and we are evaluating your documents.','kipkirui133@gmail.com',[request.data['email']], fail_silently = True)
         print("done sending mail")
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
