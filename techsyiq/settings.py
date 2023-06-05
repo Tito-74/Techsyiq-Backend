@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 # from decouple import config
 import os
 import cloudinary
@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'Course',
     'Applications',
     'marketing',
+    'drf_yasg',
 ]
 
 CORS_ALLOW_CREDENTIALS = True 
@@ -113,14 +114,17 @@ WSGI_APPLICATION = 'techsyiq.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+print(os.environ.get('DBNAME'))
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DBNAME'),
+        'USER': os.environ.get('DBUSER'),
+        'PASSWORD': os.environ.get('DBPASS'),
+        'HOST': os.environ.get('DBHOST'),
+        'PORT': os.environ.get('DBPORT'),
     }
 }
-
 
 
 # Password validation
@@ -173,4 +177,4 @@ EMAIL_USE_TLS=os.environ.get("EMAIL_USE_TLS")
 EMAIL_USE_SSL=os.environ.get("EMAIL_USE_SSL")
 
 
-# print("email", EMAIL_PORT)
+print("email", EMAIL_PORT)
