@@ -1,0 +1,22 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: techsyiq
+      POSTGRES_DB: techsyicdb
+      POSTGRES_PASSWORD: admin1234
+    volumes:
+      - pgdata:/var/lib/posgresql/data
+  backend:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/backend
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
+volumes:
+  pgdata:
