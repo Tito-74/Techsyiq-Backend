@@ -41,7 +41,7 @@ REFRESH_TOKEN_SECRET_KEY = 'tito@techsyiq-secrets'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -66,9 +66,10 @@ INSTALLED_APPS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True 
-CORS_ORIGIN_WHITELIST = [
-   'http://localhost:3000' # the domain for front-end app(you can add more than 1)
-]
+CORS_ORIGIN_ALLOW_ALL= True
+# CORS_ORIGIN_WHITELIST = [
+#    'http://localhost:3000' # the domain for front-end app(you can add more than 1)
+# ]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
